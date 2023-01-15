@@ -17,7 +17,7 @@ app.get('/', (req, res) =>{
 
 
 
-
+// list of category api
 app.get('/category',(req,res) => {
     db.collection('category').find().toArray((err,result) => {
         if(err) throw err;
@@ -27,12 +27,13 @@ app.get('/category',(req,res) => {
 
 
 
-
-
+//  list of records api
  app.get('/records',(req,res) => {
     let query={}
     let categoryId = Number(req.query.categoryId);
     
+    
+    //  records wrt category api
     if(categoryId)
     {
         query={category_id:categoryId}
@@ -56,6 +57,7 @@ app.get('/category',(req,res) => {
     let lrating = Number(req.query.lrating);
     let hrating = Number(req.query.hrating);
 
+    // filter on basis of category + movieType api
     if(movieType)
     {
         query={
@@ -63,6 +65,8 @@ app.get('/category',(req,res) => {
             movie_type:movieType
         }
     }
+
+    // filter on basis of category + rating api
     else if(lrating && hrating)
     {
        query={
@@ -79,7 +83,7 @@ app.get('/category',(req,res) => {
 
 
 
-
+// detail of category api
 app.get('/details/:categoryId',(req,res) => {
     //let id = mongo.ObjectId(req.params.restId)
     let categoryId = Number(req.params.categoryId)
